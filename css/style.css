@@ -1,0 +1,207 @@
+@charset "UTF-8";
+
+html {
+    /* ブラウザの設定を活かす */
+    /* ブラウザで拡大率が指定された場合にそちらを有効にする
+       これを設定しておかないとブラウザで変更しても効かない可能性がある */
+    /* ブラウザの標準(ルート情報) 16px → 1rem */
+    font-size: 100%;
+}
+
+body {
+    color: #383e45;
+    /* 1remはhtmlの100%(16px) */
+    /* 小数点数の0は省略可 .9remとも記載可能 */
+    font-size: 0.9rem;  
+}
+
+a {
+    /* 下線をなくす */
+    text-decoration: none;
+}
+
+img {
+    /* どんなに写真の寸法が大きいファイルでも最大幅は親要素の幅まで */
+    max-width: 100%;
+}
+
+li {
+    /* 黒丸などのマーカーをなし */
+    list-style: none;
+}
+
+.site-title {
+    width: 120px;
+    /* 行間 */
+    /* 画像をメインにしてアンカーを極力縮めるため */
+    line-height: 1px;
+    /* padding 上下・左右 */
+    padding: 10px 0;
+}
+
+/* クラスsite-titleの子のaの指定 */
+.site-title a {
+
+    display: block;
+}
+
+.section-title {
+    display: inline;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 60px;
+    border-bottom: solid 1px #383e45;
+}
+
+.content-title {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+/* コンテンツの幅を絞る時によく使われるクラス名 */
+.wrapper {
+    /* 広がっても、そのコンテンツは960pxまで */
+    max-width: 960px;
+    margin: 0 auto 100px auto;
+    /* 親要素の幅に対しての4% */
+    padding: 0 4%;
+    text-align: center;
+}
+
+/*-------------------------------------------
+ヘッダー
+-------------------------------------------*/
+#header {
+    /* 直属の子要素をとにかく横並びに強制 */
+    display: flex;
+    /* flexの進行方向の並び */
+    justify-content: space-between;
+    /* flexの進行方向とは垂直方向の並び */
+    align-items: center;
+    margin: 0 auto;
+}
+
+#header ul {
+    /* HTMLのaboutとBicycleのアンカーを横並びにするため */
+    display: flex;
+    padding: 10px 0;
+}
+
+#header li {
+    margin-left: 30px;
+}
+
+#header li a {
+    color: #24292e;
+}
+
+/* 「:hover」をつけると、「マウスオーバーした時」のデザインという意味になる（疑似クラス） */
+#header li a:hover {
+    /* 透明度 0が透明、1が不透明 */
+    opacity: 0.7;
+}
+
+/*-------------------------------------------
+Mainvisual
+-------------------------------------------*/
+#mainvisual {
+    margin-bottom: 80px;
+}
+#maivisual img {
+    /* 親要素の幅に合わせる（画像が足りない場合は拡大） */
+    width: 100%;
+    /* 画像の幅の上限は1928px */
+    max-width: 1928px;
+    height: 60px;
+    object-fit: cover;
+}
+
+/*-------------------------------------------
+About
+-------------------------------------------*/
+#about .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#about img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 30px;
+}
+
+#about.text {
+    text-align: left;
+}
+
+/*-------------------------------------------
+Bicycle
+-------------------------------------------*/
+#bicycle ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+#bicycle li {
+    width: 32%;
+}
+
+/*-------------------------------------------
+footer
+-------------------------------------------*/
+#footer {
+    font-size: 0.5rem;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/*-------------------------------------------
+SP
+-------------------------------------------*/
+/* mediaクエリ→レスポンシブデザインを始める条件 */
+/* ()の中に発動条件 */
+/* →ウィンドウの幅が大きくても600pxの場合  */
+/* 条件を逆にする場合(画面が大きい場合）はmin-widthを使う */
+@media screen and (max-width: 600px) {
+
+    /*-------------------------------------------
+    Mainvisual
+    -------------------------------------------*/
+    #mainvisual img {
+        /* vhはウィンドウの高さの単位 */
+        /* 100vhはウィンドウの高さ100%  */
+        /* ※100vwはウィンドウの幅 */
+        /* calc()は()の中で計算できるようにする */
+        /* 引いている60pxはブラウザの検索バーのだいたいの予想の高さ */
+        height: calc(100vh - 60px);
+    }
+
+    /*-------------------------------------------
+    About
+    -------------------------------------------*/
+    #about .content {
+        /* スマフォの場合 */
+        /* 並び方を縦にする */
+        /* flex-directionの初期値はrow(横並び) */
+        flex-direction: column;
+    }
+
+    #about img {
+        margin-right: 0;
+    }
+
+    /*-------------------------------------------
+    Bicycle
+    -------------------------------------------*/
+    #bicycle ul {
+        flex-direction: column;
+    }
+
+    #bicycle li {
+
+        width: 100%;
+        margin-bottom: 30px;
+    }
+}
